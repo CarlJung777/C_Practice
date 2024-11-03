@@ -6,12 +6,14 @@
  ********************************/
 #include <limits.h>
 #include <stdio.h>
+#include <string.h>
 #define PI 3.14159
 int add(int a, int b);
 int arr();
 int count;
+int pointer();
 extern void write_extern();
-
+char charArray();
 enum DAY
 {
     MON = 1,
@@ -46,6 +48,8 @@ int main()
     {
         printf("枚举：%d \n", day);
     }
+    pointer();
+    charArray();
     return 0;
 }
 
@@ -69,5 +73,34 @@ int arr()
     }
     int leghth = sizeof(n) / sizeof(n[0]);
     printf(" n leghth is %d \n", leghth);
+    return 0;
+}
+
+int pointer()
+{
+    int some = 44;
+    int *someP;
+    someP = &some;
+
+    printf("some 的地址：%p \n", &some);
+    printf("someP 的地址：%p \n", someP);
+    printf("someP 的值：%d \n", *someP);
+    return 0;
+}
+
+char charArray()
+{
+    char lu[9] = {'n', 'a', 'n', 'a', 's', 'a', 'w', 'a'};
+    char str1[14] = "lululu";
+    char str2[14] = "ssssss";
+    char str3[14];
+    int len;
+    strcpy(str3, str1);
+    printf("赋值右边str1 到 str3: %s \n", str3);
+    strcat( str1, str2);
+    printf("链接左边和右边: %s \n", str1);
+    len = strlen(str1);
+    printf("链接后长度:  %d\n", len );
+    printf("是：%s \n", lu);
     return 0;
 }
