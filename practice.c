@@ -12,8 +12,11 @@ int add(int a, int b);
 int arr();
 int count;
 int pointer();
+
+void charArray();
+int whatsBook();
 extern void write_extern();
-char charArray();
+
 enum DAY
 {
     MON = 1,
@@ -48,6 +51,7 @@ int main()
     {
         printf("枚举：%d \n", day);
     }
+    whatsBook();
     pointer();
     charArray();
     return 0;
@@ -73,6 +77,7 @@ int arr()
     }
     int leghth = sizeof(n) / sizeof(n[0]);
     printf(" n leghth is %d \n", leghth);
+    
     return 0;
 }
 
@@ -88,7 +93,7 @@ int pointer()
     return 0;
 }
 
-char charArray()
+void charArray()
 {
     char lu[9] = {'n', 'a', 'n', 'a', 's', 'a', 'w', 'a'};
     char str1[14] = "lululu";
@@ -97,10 +102,35 @@ char charArray()
     int len;
     strcpy(str3, str1);
     printf("赋值右边str1 到 str3: %s \n", str3);
-    strcat( str1, str2);
+    strcat(str1, str2);
     printf("链接左边和右边: %s \n", str1);
     len = strlen(str1);
-    printf("链接后长度:  %d\n", len );
+    printf("链接后长度:  %d\n", len);
     printf("是：%s \n", lu);
+     
+}
+
+int whatsBook()
+{
+    struct Books
+    {
+        char title[50];
+        char author[50];
+        char subject[100];
+        int book_id;
+    };
+
+    struct Books book1;
+
+    strcpy(book1.title, "milu");
+    strcpy(book1.author, "lu");
+    strcpy(book1.subject, "C Programming Tutorial");
+    book1.book_id = 6495407;
+
+    printf("Book 1 title : %s\n", book1.title);
+    printf("Book 1 author : %s\n", book1.author);
+    printf("Book 1 subject : %s\n", book1.subject);
+    printf("Book 1 book_id : %d\n", book1.book_id);
+
     return 0;
 }
