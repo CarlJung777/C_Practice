@@ -16,6 +16,14 @@ int pointer();
 void charArray();
 int whatsBook();
 extern void write_extern();
+int unionData();
+
+union Data
+{
+    int i;
+    float f;
+    char str[20];
+};
 
 enum DAY
 {
@@ -54,6 +62,7 @@ int main()
     pointer();
     charArray();
     whatsBook();
+    unionData();
     return 0;
 }
 
@@ -77,7 +86,7 @@ int arr()
     }
     int leghth = sizeof(n) / sizeof(n[0]);
     printf(" n leghth is %d \n", leghth);
-    
+
     return 0;
 }
 
@@ -107,7 +116,6 @@ void charArray()
     len = strlen(str1);
     printf("链接后长度:  %d\n", len);
     printf("是：%s \n", lu);
-     
 }
 
 int whatsBook()
@@ -131,6 +139,22 @@ int whatsBook()
     printf("Book 1 author : %s\n", book1.author);
     printf("Book 1 subject : %s\n", book1.subject);
     printf("Book 1 book_id : %d\n", book1.book_id);
+
+    return 0;
+}
+
+int unionData()
+{
+    union Data data;
+
+    data.i = 10;
+    printf("data.i : %d\n", data.i);
+
+    data.f = 220.5;
+    printf("data.f : %f\n", data.f);
+
+    strcpy(data.str, "C Programming");
+    printf("data.str : %s\n", data.str);
 
     return 0;
 }
