@@ -51,9 +51,9 @@ int main()
     {
         printf("枚举：%d \n", day);
     }
-    whatsBook();
     pointer();
     charArray();
+    whatsBook();
     return 0;
 }
 
