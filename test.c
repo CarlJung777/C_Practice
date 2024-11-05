@@ -1,8 +1,14 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <assert.h>
-#include <ctype.h>
+#include <errno.h>
+#include <string.h>
+#include <float.h>
+#include <limits.h>
+#include <locale.h>
+#include <math.h>
 
+// <assert.h>
 void test_positive(int x)
 {
     assert(x > 0);
@@ -17,6 +23,7 @@ int main()
     test_positive(b);
     printf("This line will not be executed if an assertion fails.\n");
     
+    // <ctype.h>
     char ch;
     char chars[] = "Lu 1? \n";
     for (int i = 0; chars[i] != '\0'; i++) {
@@ -33,6 +40,50 @@ int main()
             printf(" - ispunct: No\n");
         }
     }
+    
+    // <float.h>
+    printf("float 类型范围：%.10e 到 %.10e\n", FLT_MIN, FLT_MAX);
+    printf("double 类型范围：%.10e 到 %.10e\n", DBL_MIN, DBL_MAX);
+    printf("long double 类型范围：%.10Le 到 %.10Le\n", LDBL_MIN, LDBL_MAX);
 
+    printf("float 精度：%d 位\n", FLT_DIG);
+    printf("double 精度：%d 位\n", DBL_DIG);
+    printf("long double 精度：%d 位\n", LDBL_DIG);
+    
+    // <limits.h>
+    printf("Character types:\n");
+    printf("CHAR_BIT: %d\n", CHAR_BIT);
+    printf("CHAR_MIN: %d\n", CHAR_MIN);
+    printf("CHAR_MAX: %d\n", CHAR_MAX);
+    printf("SCHAR_MIN: %d\n", SCHAR_MIN);
+    printf("SCHAR_MAX: %d\n", SCHAR_MAX);
+    printf("UCHAR_MAX: %u\n", UCHAR_MAX);
+    
+    // <math.h>
+    double x = 9.0;
+    double y = 2.0;
+    // 计算平方根
+    printf("sqrt(%.1f) = %.1f\n", x, sqrt(x));
+    // 计算幂
+    printf("%.1f ^ %.1f = %.1f\n", x, y, pow(x, y));
+    
+    // <errno.h>
+    FILE *file;
+    // 尝试打开一个不存在的文件
+    file = fopen("nonexistent_file.txt", "r");
+
+    if (file == NULL) {
+        // 输出错误代码和错误信息
+        printf("无法打开文件！错误代码: %d\n", errno);
+        printf("错误信息: %s\n", strerror(errno));
+    } else {
+        // 文件成功打开，关闭文件
+        fclose(file);
+    }
+    
+    // <locale.h>
+    setlocale(LC_ALL, "en_US.UTF-8");
+    printf("当前地区设置为: %s\n", setlocale(LC_ALL, NULL));
+    
     return 0;
 }
