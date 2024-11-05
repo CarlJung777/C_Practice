@@ -1,32 +1,38 @@
+#include <ctype.h>
 #include <stdio.h>
-#include <string.h>
-int whatsBook();
+#include <assert.h>
+#include <ctype.h>
+
+void test_positive(int x)
+{
+    assert(x > 0);
+}
+
 int main()
 {
-    whatsBook();
-    return 0;
-}
-int whatsBook()
-{
-    struct Books
-    {
-        char title[50];
-        char author[50];
-        char subject[100];
-        int book_id;
-    };
-
-    struct Books book1;
-
-    strcpy(book1.title, "milu");
-    strcpy(book1.author, "lu");
-    strcpy(book1.subject, "C Programming Tutorial");
-    book1.book_id = 6495407;
-
-    printf("Book 1 title : %s\n", book1.title);
-    printf("Book 1 author : %s\n", book1.author);
-    printf("Book 1 subject : %s\n", book1.subject);
-    printf("Book 1 book_id : %d\n", book1.book_id);
+    
+    int a = 5;
+    int b = 3;
+    test_positive(a);
+    test_positive(b);
+    printf("This line will not be executed if an assertion fails.\n");
+    
+    char ch;
+    char chars[] = "Lu 1? \n";
+    for (int i = 0; chars[i] != '\0'; i++) {
+        ch = chars[i];
+        printf("Character: '%c'\n", ch);
+        if (isalpha(ch)) {
+            printf(" - isalpha: Yes\n");
+        } else {
+            printf(" - isalpha: No\n");
+        }    
+        if (isspace(ch)) {
+            printf(" - ispunct: Yes\n");
+        } else {
+            printf(" - ispunct: No\n");
+        }
+    }
 
     return 0;
 }

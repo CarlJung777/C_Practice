@@ -4,7 +4,6 @@
  *
  *
  ********************************/
-#include <limits.h>
 #include <stdio.h>
 #include <string.h>
 #define PI 3.14159
