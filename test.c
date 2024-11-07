@@ -10,6 +10,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <stddef.h>
+#include <stdarg.h>
 
 // <assert.h>
 void test_positive(int x)
@@ -21,6 +22,8 @@ struct MyStruct {
     double b;
     char c;
 };
+
+int sum(int count,...);
 
 int main()
 {
@@ -116,6 +119,10 @@ int main()
     printf("Offset of b: %zu bytes\n", offsetof(struct MyStruct, b));
     printf("Offset of c: %zu bytes\n", offsetof(struct MyStruct, c));
     
+    // <stdarg.h>
+    printf("Sum of 1, 2, 3: %d\n", sum(3, 1, 2, 3)); // 输出 6
+    printf("Sum of 4, 5, 6, 7: %d\n", sum(4, 4, 5, 6, 7)); // 输出 22
+    
     // <stdlib.h>
     srand(time(NULL));
     int min = 1, max = 99;
@@ -138,4 +145,19 @@ int main()
         }
     free(arr); 
     return 0;
+}
+
+int sum(int count,...)
+{
+    int total = 0;
+    va_list args;
+    va_start(args, count);
+    
+    for (int i = 0; i < count; i++) 
+        {
+            total += va_arg(args, int);
+        }
+    
+    va_end(args);
+    return total;
 }
