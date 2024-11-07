@@ -1,3 +1,4 @@
+#include <time.h>
 #include <ctype.h>
 #include <stdio.h>
 #include <assert.h>
@@ -7,12 +8,19 @@
 #include <limits.h>
 #include <locale.h>
 #include <math.h>
+#include <stdlib.h>
+#include <stddef.h>
 
 // <assert.h>
 void test_positive(int x)
 {
     assert(x > 0);
 }
+struct MyStruct {
+    int a;
+    double b;
+    char c;
+};
 
 int main()
 {
@@ -85,5 +93,49 @@ int main()
     setlocale(LC_ALL, "en_US.UTF-8");
     printf("当前地区设置为: %s\n", setlocale(LC_ALL, NULL));
     
+    // <time.h>
+    time_t current_time; 
+    struct tm *time_info; 
+    char buffer[80];
+    
+    time(&current_time);
+    time_info = localtime(&current_time);
+    strftime(buffer, sizeof(buffer), "%Y-%m-%d %H:%M:%S", time_info);
+    printf("Formatted time: %s\n", buffer);
+    
+    printf("Current time: %s", ctime(&current_time));
+    
+    // <string.h>
+    char str1[6] = "lu";
+    char str2[3] = "lu";
+    strcat(str1, str2);
+    printf("is %s ! \n", str1);
+    
+    // <stddef.h>
+    printf("Offset of a: %zu bytes\n", offsetof(struct MyStruct, a));
+    printf("Offset of b: %zu bytes\n", offsetof(struct MyStruct, b));
+    printf("Offset of c: %zu bytes\n", offsetof(struct MyStruct, c));
+    
+    // <stdlib.h>
+    srand(time(NULL));
+    int min = 1, max = 99;
+    int random_number = (rand() % (max - min + 1)) + min;
+    printf("随机数: %d\n", random_number);
+    
+    int *arr;
+    size_t n = 5;
+    
+    arr = (int *)malloc(n * sizeof(int));
+    if (arr == NULL) {
+        fprintf(stderr, "Memory allocation failed\n");
+        return 1;
+    }
+    
+    for (size_t i = 0; i < n; i++) 
+        {
+            arr[i] = i + 1;
+            printf("%d \n", arr[i]);
+        }
+    free(arr); 
     return 0;
 }
